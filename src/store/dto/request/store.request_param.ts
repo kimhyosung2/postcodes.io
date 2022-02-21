@@ -1,5 +1,4 @@
 import { StoreSearchType } from "../enum/enum"
-
 // 데이터 요청 목적
 export class StoreRequestParam {
   readonly storeName!: string

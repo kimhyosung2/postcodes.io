@@ -43,21 +43,21 @@
 1. npm install
 2. npm run start dev
 
-storeName 엔 store.json 파일안의 name / postcode 값이 들어갈 수 있고
+storeName 엔 store.json 파일안의 name / postcode 값이 들어갈 수 있다
 storeType 엔 name / postcode 인지 타입을 지정해주어야 한다.
 limit엔 반경 몇개의 store를 찾을지 수를 정해주어야 한다.
 radius 주변 store를 살필 크기의 범위이다
 
  - store.json 내에 정보를 모두 불러온다
- ㄴ http://localhost:3000/store
+ * http://localhost:3000/store
   
  - storeName에 해당하는 정보를 불러온다
- ㄴ http://localhost:3000/store/{storeName}/{storeType}
- ㄴ 예시) http://localhost:3000/store/AL1 2RJ/postcode
+ * http://localhost:3000/store/{storeName}/{storeType}
+ * 예시) http://localhost:3000/store/AL1 2RJ/postcode
 
  - storeName의 근처에 존재하는 store 정보를 불러온다
- ㄴ http://localhost:3000/store/near/{storeName}/{storeType}/{limit}/{radius}
- ㄴ 예시) http://localhost:3000/store/near/St_Albans/name/5/1000
+ * http://localhost:3000/store/near/{storeName}/{storeType}/{limit}/{radius}
+ * 예시) http://localhost:3000/store/near/St_Albans/name/5/1000
     
 
 

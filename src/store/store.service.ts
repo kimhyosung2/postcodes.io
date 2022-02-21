@@ -9,6 +9,8 @@ import { NearStoreBody, NearStoreResponseBody, StoreBody, StoreResponseBody } fr
 export class StoreService {
   private postcodes = require('node-postcodes.io');
 
+  // 해당하는 store의 반경에 존재하는 store의
+  // 이름, 타입, 반경, 근처 store 최대 수 정보를 불러온다
   async getNearStoreInfo(
     param: NearStoreRequestParam
   ): Promise<StoreResponseBody> {
@@ -24,13 +26,14 @@ export class StoreService {
       limit: param.limit,
     })
     return plainToClass(NearStoreResponseBody, {
-      result: this.convertAnyType2ClassType2(result).sort(function(a, b) {
+      result: this.convert2NearStoreClassType(result).sort(function(a, b) {
         return b.northings - a.northings
       }),
       status: result.status
     })
   }
 
+  // 해당하는 타입과 이름의 store 정보를 불러온다
   async getStoreInfo(
     storeName: string,
     storeType: StoreSearchType
@@ -46,11 +49,12 @@ export class StoreService {
     });
 
     return plainToClass(StoreResponseBody, {
-      result: this.convertAnyType2ClassType(result, postList.name),
+      result: this.convert2StoreClassType(result, postList.name),
       status: result.status
     })
   }
 
+  // 모든 store 정보를 불러온다 
   async getAllStoreInfo(): Promise<StoreResponseBody> {
     // store.json 파일 정보를 불러온다
     const postList = this.getStoreList()
@@ -71,7 +75,7 @@ export class StoreService {
     });
 
     return plainToClass(StoreResponseBody, {
-      result: this.convertAnyType2ClassType(result, nameList),
+      result: this.convert2StoreClassType(result, nameList),
       status: result.status
     })
   }
@@ -101,7 +105,7 @@ export class StoreService {
   }
 
   // any 형식을 class 형식으로 변환 하는 역할
-  private convertAnyType2ClassType(result: any, nameList: string[] | string) {
+  private convert2StoreClassType(result: any, nameList: string[] | string) {
     const storeResponseBody: StoreBody[] = []
     let pluralFlag = false
 
@@ -129,7 +133,7 @@ export class StoreService {
   }
 
   // any 형식을 class 형식으로 변환 하는 역할
-  private convertAnyType2ClassType2(result: any) {
+  private convert2NearStoreClassType(result: any) {
     const storeResponseBody: NearStoreBody[] = []
 
     for (let i = 0; i < result.result.length; i++) {

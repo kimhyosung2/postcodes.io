@@ -14,12 +14,13 @@ export class NearStoreBody extends PickType(
 ) {
 }
 
-// 데이터 반환 목적
+// 데이터 반환 목적 클래스
 export class StoreResponseBody {
   result!: StoreBody[]
   status!: number
 }
 
+// 데이터 반환 목적 클래스
 export class NearStoreResponseBody {
   result!: NearStoreBody[]
   status!: number
